@@ -31,7 +31,11 @@ function Clique:OptionsOnLoad()
         button:SetScript("OnEnter", function(self)
 			local parent = self:GetParent()
             if parent:IsEnabled() == 1 then
-                SpellButton_OnEnter(parent)
+                local link = parent.data and GetSpellLink(parent.data)
+                GameTooltip:SetOwner(parent, "ANCHOR_RIGHT")
+                if link then
+                    GameTooltip:SetHyperlink(link)
+                end
             else
                 button:GetHighlightTexture():Hide()
             end
